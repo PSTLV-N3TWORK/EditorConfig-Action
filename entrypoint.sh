@@ -45,6 +45,7 @@ getPushedCommitInfo() {
 
 getPullRequestCommitInfo() {
   echo "Getting info about commits in pull request..."
+  # cat "${GITHUB_EVENT_PATH}"
   DELETED=false
   HEAD_COMMIT="$(getEventByPath '.pull_request.head.sha')"
   BASE_COMMIT="$(getEventByPath '.pull_request.base.sha')"
@@ -52,7 +53,7 @@ getPullRequestCommitInfo() {
   PR_ACTION="$(getEventByPath '.action')"
   PULL_REF="$(getEventByPath '.pull_request.head.ref')"
   FULL_PR_REF="pull/${PULL_ID}/head:${PULL_REF}"
-  echo "PR_ACTION: ${PR_ACTION}"
+  echo "PR_ACTION:${PR_ACTION} - HEAD_COMMIT:${HEAD_COMMIT} - BASE_COMMIT:${BASE_COMMIT} - PULL_ID:${PULL_ID} - PULL_REF:${PULL_REF}"
   case "${PR_ACTION}" in
     opened | reopened | ready_for_review | synchronize)
       true # noop
