@@ -26,6 +26,7 @@ findInCwdOrParent() {
 }
 
 configureGit() {
+  git config --global --add safe.directory /github/workspace
   # This should be the default but it's important that it's set correctly
   git config --global core.quotePath true
 }
